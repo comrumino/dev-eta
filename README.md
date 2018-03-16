@@ -1,5 +1,5 @@
-# dev-eta
-A python library for common methods which improve development efficiency
+# deveta
+The repository name _deveta_ comes from DEVeloper-ETA, where eta the variable commonly used for the efficiency of a Carnot heat engine. Hence, the repository aims to maximize developer performance through collecting things which may prove useful in the future.
 
 ## Installation
 This repository is available as both a github release and on PyPi.
