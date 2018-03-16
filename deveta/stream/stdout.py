@@ -7,6 +7,17 @@ from ansi_colors import FG_COLORS
 __all__ = ['kprint', 'rprint', 'gprint', 'yprint', 'bprint', 'mprint', 'cprint', 'wprint']
 
 
+"""Explaination of ANSI_ESC_SEQ syntac:
+    \\x := the following two characters are hex-digits
+    1b hex-digits := the escape control character
+    [ := Control Sequence Introducer
+Extra resources:
+    https://en.wikipedia.org/wiki/ANSI_escape_code
+    http://wiki.bash-hackers.org/scripting/terminalcodes
+"""
+_ANSI_ESC_SEQ = "\x1b[{}m"
+
+
 class InvalidForegroundColorError(Exception):
     """Raised within `_format_fg_color` when invalid color specified"""
     pass
@@ -28,10 +39,9 @@ def _format_fg_color(target, color):
     Return:
         String object
     """
-    ansi_esc_seq = '\x1b[{}m'
-    suffix = ansi_esc_seq.format(39)  # 39 will reset the foreground color to default
+    suffix = _ANSI_ESC_SEQ.format(39)  # 39 will reset the foreground color to default
     if color in FG_COLORS:
-        prefix = ansi_esc_seq.format(FG_COLORS[color])
+        prefix = _ANSI_ESC_SEQ.format(FG_COLORS[color])
     else:
         raise InvalidForegroundColorError
     return '{}{}{}'.format(prefix, target, suffix)
