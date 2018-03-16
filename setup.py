@@ -4,7 +4,7 @@ import sys
 from setuptools import setup, find_packages
 
 package_name = 'deveta'
-description = 'A python library for the miscellaneous'
+description = 'A python library that collects potentially useful code-blocks'
 readme = open('man/README.rst').read()
 requirements = []
 long_description = open('man/README.rst').read()
