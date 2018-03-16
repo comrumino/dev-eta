@@ -1,6 +1,9 @@
 # dev-eta
 A python library for common methods which improve development efficiency
 
+## Installation
+This repository is available as both a github release and on PyPi.
+
 ## Building
 The `wheel` package is a dependency to create a wheel distribution. Create the `.whl` file:
 ```
