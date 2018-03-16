@@ -7,6 +7,8 @@ This repository is available as a GitHub release and as a PyPi package. Alternat
 ## Build
 The [wheel package](https://pypi.python.org/pypi/wheel) is a dependency to create a _wheel_ distribution. Create the `.whl` file:
 ```
+$ git clone git@github.com:comrumino/deveta.git
+$ cd deveta
 $ python2 setup.py bdist_wheel
 ```
 For more details on creating `.whl` files, see the [official _wheel_ documentation](https://wheel.readthedocs.io/en/stable/).
