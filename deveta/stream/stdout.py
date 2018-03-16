@@ -99,7 +99,7 @@ def kprint(*args, **kwargs):
             k -> blacK
         It follows that kprint prints black, rprint prints red, and so on. Black is mapped to k
         considering that black is a common default, where blue is mapped to b in anticipation of the
-        user's disposition while using this module --- printing text with a non-default foreground color.
+        user's disposition while using this module (printing text with a non-default foreground color).
     Parameters:
         Accepts the same arguments and keyword-arguments as `future_print`
     Raise:
