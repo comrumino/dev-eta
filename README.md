@@ -2,7 +2,7 @@
 The repository name _deveta_ comes from DEVeloper-ETA &#8212; the efficiency of a Carnot heat engine is commonly denoted by eta (&#951;). Hence, the repository aims to maximize developer performance by means of collecting code-blocks that may prove useful in the future.
 
 ## Install
-This repository is available as a GitHub release and as a PyPi package. Alternatively, see the next section on how to build _deveta_ manually.
+_Deveta_ is available as a GitHub release and as a [PyPi package](https://pypi.python.org/pypi/deveta). Alternatively, see the next section on how to build _deveta_ manually.
 
 ## Build
 The [wheel package](https://pypi.python.org/pypi/wheel) is a dependency to create a _wheel_ distribution. Create the `.whl` file:
