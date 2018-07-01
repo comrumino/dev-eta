@@ -12,7 +12,7 @@ class RadixTrie(object):
         note: target is used to indicate a node's associated key and
               absolute/relative paths
     '''
-    def __init__(self,  seperator='/', descendents=None):
+    def __init__(self, seperator='/', descendents=None):
         self.seperator = seperator
         self.node = defaultdict(RadixTrie)
         if isinstance(descendents, list):
@@ -66,7 +66,7 @@ class RadixTrie(object):
             if key == self.seperator:
                 output_chunks.extend(self.node[key].to_list(leafs_only=leafs_only))
                 continue
-            path = pwd+self.seperator+key if descendent else key
+            path = pwd + self.seperator + key if descendent else key
             if not leafs_only or (leafs_only and self.node[key].is_leaf()):
                 output_chunks.append(path)
             output_chunks.extend(self.node[key].to_list(leafs_only=leafs_only, pwd=path))
