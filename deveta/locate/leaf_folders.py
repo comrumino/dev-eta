@@ -1,5 +1,3 @@
-#!/usr/bin/env python2
-''' leaf_folders docstring '''
 from __future__ import print_function
 from collections import defaultdict
 import argparse
@@ -11,7 +9,7 @@ __all__ = ['leaf_folders']
 
 class RadixTrie(object):
     ''' RadixTrie, used to store directory tree information
-        note: target is used to indicate a node's associated key and 
+        note: target is used to indicate a node's associated key and
               absolute/relative paths
     '''
     def __init__(self,  seperator='/', descendents=None):
@@ -38,7 +36,7 @@ class RadixTrie(object):
         radixtrie = self
         for i, directory in enumerate(target.split(self.seperator)):
             if directory == '':
-               directory = self.seperator
+                directory = self.seperator
             radixtrie = radixtrie.node[directory]
 
     def is_leaf(self, target=None):
@@ -73,40 +71,49 @@ class RadixTrie(object):
                 output_chunks.append(path)
             output_chunks.extend(self.node[key].to_list(leafs_only=leafs_only, pwd=path))
         return output_chunks
-        
+
 
 class Error(Exception):
-     pass
+    pass
+
 
 class PathNotFoundError(Error):
-     def __init__(self, value):
-         self.msg = "The provided path '{}' does not exist. Please provide a valid path.".format(value)
-     def __str__(self):
-         return self.msg
+    def __init__(self, value):
+        self.msg = "The provided path '{}' does not exist. Please provide a valid path.".format(value)
+
+    def __str__(self):
+        return self.msg
+
 
 class PathTypeError(Error):
-     def __init__(self, value):
-         self.msg = "The provided path '{}' is a file. Please provide a valid directory.".format(value)
-     def __str__(self):
-         return self.msg
+    def __init__(self, value):
+        self.msg = "The provided path '{}' is a file. Please provide a valid directory.".format(value)
+
+    def __str__(self):
+        return self.msg
+
 
 class InvalidArgumentError(Error):
-     def __init__(self, value):
-         self.msg = "Invalid Argument: {}".format(value)
-     def __str__(self):
-         return self.msg
+    def __init__(self, value):
+        self.msg = "Invalid Argument: {}".format(value)
+
+    def __str__(self):
+        return self.msg
+
 
 def path_exists(path):
     try:
         assert os.path.exists(path)
-    except AssertionError as e:
+    except AssertionError:
         raise PathNotFoundError(path)
+
 
 def is_valid_directory(path):
     try:
         assert not os.path.isfile(path)
-    except AssertionError as e:
+    except AssertionError:
         raise PathTypeError(path)
+
 
 def validate_arguments(path):
     try:
@@ -115,17 +122,19 @@ def validate_arguments(path):
     except (PathNotFoundError, PathTypeError) as e:
         raise InvalidArgumentError(e)
 
+
 def generate_directory_list(path):
     ''' Creates list of all directories by walking path '''
-    return map(lambda x : x , sorted([x[0] for x in os.walk(path) if os.path.isdir(x[0])]))[1:]
+    return map(lambda x: x, sorted([x[0] for x in os.walk(path) if os.path.isdir(x[0])]))[1:]
+
 
 def leaf_folders(path='.'):
-    ''' Description: 
+    ''' Description:
           finds all of the leaf directorys using a trie data structure to store the walk
         Arguments:
           path, the location to search for leaf nodes
         Returns:
-          list object containing leaf fodlers within path 
+          list object containing leaf fodlers within path
     '''
     try:
         leafs = []
@@ -143,12 +152,11 @@ def leaf_folders(path='.'):
 def get_args():
     parser = argparse.ArgumentParser(description='Find all leaf folders given a target path.')
     parser.add_argument('target_paths', metavar='PATHS', type=str, nargs='+',
-                    help='paths to search for leaf subfolders, or if it is one itself')
+                        help='paths to search for leaf subfolders, or if it is one itself')
     return parser.parse_args()
 
+
 def main():
-    ''' main
-    '''
     args = get_args()
     leafs = []
     for target_path in args.target_paths:
@@ -162,5 +170,4 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt as e:
-        os._exit()
-
+        os._exit(1)
