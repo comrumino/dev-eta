@@ -2,8 +2,7 @@
 the main purpose is to print text with a non-default foreground color. The colors supported
 are the eight basic ANSI terminal colors: 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', and 'white'.
 """
-from __future__ import print_function
-from ansi_colors import FG_COLORS
+from .ansi_colors import FG_COLORS
 __all__ = ['kprint', 'rprint', 'gprint', 'yprint', 'bprint', 'mprint', 'cprint', 'wprint']
 
 

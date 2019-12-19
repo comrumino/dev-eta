@@ -8,5 +8,5 @@ __version__ = '1.0.2'
 __all__ = ['locate', 'stream']
 
 
-import locate
-import stream
+from . import locate
+from . import stream
