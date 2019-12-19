@@ -18,7 +18,7 @@ _ANSI_ESC_SEQ = "\x1b[{}m"
 
 
 class InvalidForegroundColorError(Exception):
-    """Raised within `_format_fg_color` when a color other than one of the eight basic ANSI terminal colors is specified."""
+    """Raised within `_format_fg_color` if one of the eight basic ANSI terminal colors is not specified."""
     pass
 
 

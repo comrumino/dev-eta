@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-import os
-import re
 
 __all__ = ['KaryNode']
 
@@ -46,13 +44,17 @@ def check_type(given_object, expected_type, expected_subtype=None):
 
 
 class KaryNode(object):
-    def __init__(self, name, depends=[], ancestors=None):
+    def __init__(self, name, depends=None, ancestors=None):
         self._root = ancestors is None
-        self.name = check_type(name, basestring)
-        check_type(depends, list, basestring)
-        self.depends = {}  # initialize, then add
-        self.add(depends)
-        self._ancestors = [] if ancestors is not None else ancestors  # at initialization assume that only their existence matters
+        self.name = check_type(name, str)
+        check_type(depends, list, str)
+        self.depends = {}
+        self._ancestors = []
+        # check for non-default kwargs (None in place of mutable defaults for predictable behavior)
+        if depends is not None:
+            self.add(depends)
+        if ancestors is not None:
+            self._ancestors = ancestors
 
     def __repr__(self):
         return self.name
@@ -67,7 +69,7 @@ class KaryNode(object):
             result = reversed(result)
         return iter(result)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.is_leaf():
             return self.name
         else:
@@ -76,7 +78,7 @@ class KaryNode(object):
             new_frame = []
             for node in self.__iter__(include_self=False, reverse=True):
                 node_frame_rows = []
-                frame_rows = unicode(node).split('\n')
+                frame_rows = str(node).split('\n')
                 first_row = frame_rows.pop(0)
                 node_frame_rows.append(frame_join.format(first_row))
                 for frame_row in frame_rows:
@@ -116,7 +118,7 @@ class KaryNode(object):
         min_ancestors = min([len(node._ancestors) for node in nodes])
         base_comparator = nodes.pop(0)
         last_matched_offset = 0
-        for o in xrange(0 + 1, min_ancestors + 1):  # shift for negatives
+        for o in range(0 + 1, min_ancestors + 1):  # shift for negatives
             if all([base_comparator._ancestors[-o:] == node._ancestors[-o:] for node in nodes]):
                 last_matched_offset = -o
                 continue

@@ -169,5 +169,5 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except KeyboardInterrupt as e:
+    except KeyboardInterrupt:
         os._exit(1)
