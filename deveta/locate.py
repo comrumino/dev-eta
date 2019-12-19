@@ -1,6 +1,7 @@
 from __future__ import print_function
 from collections import defaultdict
 import argparse
+import logging
 import os
 import sys
 
@@ -125,7 +126,7 @@ def validate_arguments(path):
 
 def generate_directory_list(path):
     ''' Creates list of all directories by walking path '''
-    return map(lambda x: x, sorted([x[0] for x in os.walk(path) if os.path.isdir(x[0])]))[1:]
+    return sorted([x[0] for x in os.walk(path) if os.path.isdir(x[0])])[1:]
 
 
 def leaf_folders(path='.'):
@@ -143,8 +144,9 @@ def leaf_folders(path='.'):
         directories = generate_directory_list(absolute_path)
         radixtrie = RadixTrie(descendents=directories)
         leafs = radixtrie.to_list(leafs_only=True)
-    except InvalidArgumentError as e:
-        print(e, '\n', file=sys.stderr)
+    except Exception as e:
+        logging.exception("Failed to find leaf folders")
+        raise
     finally:
         return leafs
 
