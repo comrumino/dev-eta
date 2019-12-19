@@ -9,7 +9,7 @@ The [wheel package](https://pypi.python.org/pypi/wheel) is a dependency to creat
 ```
 $ git clone git@github.com:comrumino/deveta.git
 $ cd deveta
-$ python2 setup.py bdist_wheel
+$ python setup.py bdist_wheel
 ```
 For more details on creating `.whl` files, see the [official _wheel_ documentation](https://wheel.readthedocs.io/en/stable/).
 
